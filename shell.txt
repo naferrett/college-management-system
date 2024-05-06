@@ -1,0 +1,1 @@
+g++ -o projeto src/dao/ClassDAO.cpp src/dao/StudentDAO.cpp src/dao/TeacherDAO.cpp src/dao/SubjectDAO.cpp src/dto/ClassDTO.cpp src/dto/Person.cpp src/dto/Semester.cpp src/dto/StudentDTO.cpp src/dto/Subject.cpp src/dto/TeacherDTO.cpp src/menu/Menu.cpp src/system/SysInfo.cpp src/utils/Utils.cpp src/database/College.cpp src/database/Controller.cpp src/Start.cpp
