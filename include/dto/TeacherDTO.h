@@ -4,6 +4,8 @@
 #include "Person.h"
 #include <string>
 #include <vector>
+#include <set>
+#include <map>
 
 using namespace std;
 
@@ -12,7 +14,7 @@ class TeacherDTO : public Person {
     private:
         string id;
         double salary; 
-        vector<string> subjectsTaught;
+        map<string, set<string>> subjectsTaught;
 
     public:
         TeacherDTO(string name, int age, string phone, string id, double salary);
@@ -22,9 +24,11 @@ class TeacherDTO : public Person {
 
         double getSalary() const;
         void setSalary(const double& salary);
-        
-        void addSubject(const string subjectCode);
-        vector<string> getSubjectsTaught() const;
+
+        map<string, set<string>>& getSubjectsTaught();
+
+        void addSubject(const string semesterId, const string subjectCode);
+        set<string> findSubjectsTaught(const string semesterId) const;
 
 };
 

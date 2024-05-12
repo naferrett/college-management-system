@@ -29,7 +29,7 @@ void ClassDAO::addProfessorToClass(const string semesterId, const string subject
         classDTO->setTeacherId(teacherId);
         
         shared_ptr<TeacherDTO> teacherPtr = dynamic_pointer_cast<TeacherDTO>(teacherObject);
-        teacherPtr->addSubject(subjectCode);
+        teacherPtr->addSubject(semesterId, subjectCode);
 
     } catch (const exception& e) {
         cout << "Erro: " << e.what() << endl;
