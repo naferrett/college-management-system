@@ -19,6 +19,7 @@ void ClassDAO::addProfessorToClass(const string semesterId, const string subject
             throw runtime_error("Não há nenhuma classe com esses dados.");
         }
 
+        //O second é usado para pegar apenas o objeto no par findTeacher, o qual é armazenado na variável teacherObject
         auto findTeacher = College::getTeachers().find(teacherId);
         shared_ptr<Person> teacherObject = findTeacher->second;
 
@@ -26,8 +27,11 @@ void ClassDAO::addProfessorToClass(const string semesterId, const string subject
             throw runtime_error("Não foi encontrado um professor com o ID correspondente.");
         }
 
+        //Adiciona um professor a classe
         classDTO->setTeacherId(teacherId);
         
+        //Passa o teacherObject do tipo Person para o tipo TeacherDTO, de forma a poder usar o método addSubject
+        //O método addSubject adiciona a matéria e o semestre ao map de matérias lecionadas pelo professor na classe TeacherDTO
         shared_ptr<TeacherDTO> teacherPtr = dynamic_pointer_cast<TeacherDTO>(teacherObject);
         teacherPtr->addSubject(semesterId, subjectCode);
 
@@ -59,7 +63,7 @@ void ClassDAO::addStudentToClass(const string semesterId, const string subjectCo
     }
 }
 
-
+//Verifica se existe uma classe de acordo com as chaves (Id do semestre e código da matéria)
 shared_ptr<ClassDTO> ClassDAO::verifyClassExistence(const string semesterId, const string subjectCode) {
     vector<shared_ptr<ClassDTO>> classesVector = College::getClasses();
 
