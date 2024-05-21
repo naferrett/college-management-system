@@ -13,16 +13,15 @@ private:
     string course;
 
 public:
-    // Construtor
     StudentDTO(string name, int age, string phone, string ra, string course);
 
-    // Getters
     string getRa() const;
     string getCourse() const;
 
-    // Setters
     void setRa(const string& ra);
     void setCourse(const string& course);
+
+    ~StudentDTO();
 };
 
 #endif

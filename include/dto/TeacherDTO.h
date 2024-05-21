@@ -30,6 +30,7 @@ class TeacherDTO : public Person {
         void addSubject(const string semesterId, const string subjectCode);
         set<string> findSubjectsTaught(const string semesterId) const;
 
+        ~TeacherDTO();
 };
 
 #endif 

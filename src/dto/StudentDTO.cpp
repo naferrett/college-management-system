@@ -24,3 +24,5 @@ void StudentDTO::setCourse(const string& course) {
     this->course = course;
 }
 
+StudentDTO::~StudentDTO() {}
+

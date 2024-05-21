@@ -29,3 +29,5 @@ map<string, double> ClassDTO::getStudentGrades() {
 void ClassDTO::setStudentGrades(map<string, double>& studentGrades) {
     this->studentGrades = studentGrades;
 }
+
+ClassDTO::~ClassDTO() {}

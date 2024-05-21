@@ -29,3 +29,5 @@ string Subject::getSyllabus() {
 void Subject::setSyllabus(string syllabus) {
     this->syllabus = syllabus;
 }
+
+Subject::~Subject() {}

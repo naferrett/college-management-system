@@ -38,3 +38,5 @@ bool Semester::isValidSemesterId(string id) {
     }
     return false;
 }
+
+Semester::~Semester() {}

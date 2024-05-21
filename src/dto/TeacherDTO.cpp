@@ -42,3 +42,5 @@ set<string> TeacherDTO::findSubjectsTaught(const string semesterId) const {
 void TeacherDTO::addSubject(const string semesterId, const string subjectCode) {
     this->subjectsTaught[semesterId].insert(subjectCode);
 }
+
+TeacherDTO::~TeacherDTO() {}

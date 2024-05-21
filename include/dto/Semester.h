@@ -28,6 +28,8 @@ class Semester {
         int getSemesterNumber();
         void setSemesterNumber();
 
+        ~Semester();
+
 };
 
 #endif

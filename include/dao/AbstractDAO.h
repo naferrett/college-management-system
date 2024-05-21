@@ -15,8 +15,6 @@ class AbstractDAO {
 
     public: 
         virtual void add(const T& dto) = 0;
-        //virtual void read(const T& dto) = 0; get do College
-        virtual void update(const string key) = 0;
         virtual ~AbstractDAO() = default;
 };
 

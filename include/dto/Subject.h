@@ -25,6 +25,8 @@ class Subject {
         string getSyllabus();
         void setSyllabus(string syllabus);
 
+        ~Subject();
+
 };
 
 #endif

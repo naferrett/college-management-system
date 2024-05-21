@@ -30,6 +30,8 @@ class ClassDTO: public Semester, public Subject {
         map<string, double> getStudentGrades();
         void setStudentGrades(map<string, double>& studentGrades);
 
+        ~ClassDTO();
+
 };
 
 #endif
