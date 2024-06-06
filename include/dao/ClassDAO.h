@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <algorithm> 
 
 #ifndef CLASSDAO_H_
 #define CLASSDAO_H_
@@ -16,7 +17,8 @@ class ClassDAO: public AbstractDAO<ClassDTO, SemesterSubject> {
         void add(const ClassDTO& classDTO) override;
         void read() override;
         shared_ptr<ClassDTO> search(SemesterSubject code) override;
-        //void remove(SemesterSubject code) override;
+        void update(int option) override;
+        void remove(SemesterSubject code) override;
 
         void addProfessorToClass(SemesterSubject code, const string teacherId);
         void addStudentAndGradeToClass(SemesterSubject code, const string studentRA, const double studentGrade);

@@ -42,7 +42,7 @@ void TeacherDAO::remove(string teacherId) {
     try {
         shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
         College::getTeachers().erase(teacherId);
-        cout << "O estudante foi excluído com sucesso." << endl;
+        cout << "O professor foi removido com sucesso." << endl;
 
     } catch (const exception& e) {
         cout << "Erro: " << e.what() << endl;

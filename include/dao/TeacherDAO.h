@@ -16,6 +16,7 @@ class TeacherDAO : public AbstractDAO<TeacherDTO, string> {
         void add(const TeacherDTO& teacherDTO) override;
         void read() override;
         shared_ptr<TeacherDTO> search(string teacherId) override;
+        void update(int option) override;
         void remove(string teacherId) override;
 };
 

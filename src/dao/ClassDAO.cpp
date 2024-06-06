@@ -42,6 +42,24 @@ shared_ptr<ClassDTO> ClassDAO::search(SemesterSubject code) {
     }
 }
 
+void ClassDAO::remove(SemesterSubject code) {
+    
+    try {
+        shared_ptr<ClassDTO> classPtr = search(code);
+        auto it = find(College::getClasses().begin(), College::getClasses().end(), classPtr);
+
+        if (it == College::getClasses().end()) {
+            throw runtime_error("A classe não foi removida, pois não foi encontrada."); 
+        }
+
+        College::getClasses().erase(it);
+        cout << "A classe foi removida com sucesso." << endl;
+
+    } catch (const exception& e) {
+        cout << "Erro: " << e.what() << endl;
+    }
+}
+
 void ClassDAO::addProfessorToClass(SemesterSubject code, const string teacherId) {
     
     try {

@@ -17,7 +17,7 @@ void StudentDAO::read() {
 }
 
 shared_ptr<StudentDTO> StudentDAO::search(string studentRA) {
-
+    
     auto findStudent = College::getStudents().find(studentRA);
 
     if(findStudent == College::getStudents().end()) {
@@ -37,7 +37,7 @@ void StudentDAO::remove(string studentRA) {
     try {
         shared_ptr<StudentDTO> studentPtr = search(studentRA);
         College::getStudents().erase(studentRA);
-        cout << "O estudante foi excluído com sucesso." << endl;
+        cout << "O estudante foi removido com sucesso." << endl;
 
     } catch (const exception& e) {
         cout << "Erro: " << e.what() << endl;

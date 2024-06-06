@@ -20,3 +20,5 @@ void SubjectDAO::read() {
 shared_ptr<Subject> SubjectDAO::search(string studentRA) {
     return nullptr;
 }
+
+void SubjectDAO::remove(string key) {}
