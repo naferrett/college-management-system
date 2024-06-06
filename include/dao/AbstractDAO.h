@@ -10,11 +10,14 @@
 using namespace std;
 
 
-template <typename T>
+template <typename T, typename K>
 class AbstractDAO {
 
     public: 
         virtual void add(const T& dto) = 0;
+        virtual void read() = 0;
+        virtual shared_ptr<T> search(K key) = 0;
+        virtual void remove(const K& key) = 0;
         virtual ~AbstractDAO() = default;
 };
 

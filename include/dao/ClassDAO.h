@@ -10,14 +10,16 @@
 
 using namespace std;
 
-class ClassDAO: public AbstractDAO<ClassDTO> {
+class ClassDAO: public AbstractDAO<ClassDTO, SemesterSubject> {
 
     public: 
         void add(const ClassDTO& classDTO) override;
-        void addProfessorToClass(const string semesterId, const string subjectCode, const string teacherId);
-        void addStudentToClass(const string semesterId, const string subjectCode, const string studentRA);
+        void read() override;
+        shared_ptr<ClassDTO> search(SemesterSubject code) override;
+        //void remove(SemesterSubject code) override;
 
-        shared_ptr<ClassDTO> verifyClassExistence(const string semesterId, const string subjectCode);
+        void addProfessorToClass(SemesterSubject code, const string teacherId);
+        void addStudentAndGradeToClass(SemesterSubject code, const string studentRA, const double studentGrade);
 };
 
 #endif

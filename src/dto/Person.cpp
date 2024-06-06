@@ -19,6 +19,10 @@ string Person::getPhone() const {
 	return phone;
 }
 
+map<string, set<string>>& Person::getSubjects() {
+    return this->subjects;
+}
+
 void Person::setName(const string& name) {
     this->name = name;
 }
@@ -29,6 +33,21 @@ void Person::setAge(int age) {
 
 void Person::setPhone(const string& phone) {
     this->phone = phone;
+}
+
+set<string> Person::findSubjects(const string semesterId) {
+    auto it = subjects.find(semesterId);
+
+    if (it != subjects.end()) {
+        return it->second;
+    } else {
+        cout << "Nenhuma disciplina está registrada no semestre especificado." << endl;
+        return {};
+    }
+}
+
+void Person::addSubject(const string semesterId, const string subjectCode) {
+    this->subjects[semesterId].insert(subjectCode);
 }
 
 Person::~Person() {}

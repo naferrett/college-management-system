@@ -10,10 +10,15 @@
 
 using namespace std;
 
-class SubjectDAO: public AbstractDAO<Subject> {
+class SubjectDAO: public AbstractDAO<Subject, string> {
 
     public: 
         void add(const Subject& subject) override;
+        void read() override;
+        virtual void remove(const K& key) = 0;
+        shared_ptr<Subject> search(string key);
+        //void remove(string key);
+
 };
 
 #endif

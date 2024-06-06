@@ -1,10 +1,12 @@
 #include "../../include/dto/ClassDTO.h"
 
-ClassDTO::ClassDTO(string semesterId, int semesterYear, int semesterNumber, string subjCode, string subjName, string subjSyllabus, string teacherId, vector<string>& studentsRAs, map<string, double>& studentGrades) : Semester(id, year, semesterNumber), Subject(code, name, syllabus) {
+ClassDTO::ClassDTO(string semesterId, int semesterYear, int semesterNumber, string subjCode, string subjName, string subjSyllabus, string teacherId, vector<string>& studentsRAs, map<string, double>& studentGrades)
+    : Semester(semesterId, semesterYear, semesterNumber), Subject(subjCode, subjName, subjSyllabus), code(semesterId, subjCode) {
     this->teacherId = teacherId;
     this->studentsRAs = studentsRAs;
     this->studentGrades = studentGrades;
 }
+
 
 string ClassDTO::getTeacherId() {
     return teacherId;
@@ -28,6 +30,14 @@ map<string, double> ClassDTO::getStudentGrades() {
 
 void ClassDTO::setStudentGrades(map<string, double>& studentGrades) {
     this->studentGrades = studentGrades;
+}
+
+SemesterSubject ClassDTO::getSemesterSubjectCode() {
+    return code;
+}
+
+void ClassDTO::setSemesterSubjectCode(SemesterSubject code) {
+    this->code = code;
 }
 
 ClassDTO::~ClassDTO() {}

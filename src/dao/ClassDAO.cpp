@@ -1,5 +1,8 @@
 #include "../../include/dao/ClassDAO.h"
+#include "../../include/dao/StudentDAO.h"
+#include "../../include/dao/TeacherDAO.h"
 #include "../../include/dto/TeacherDTO.h"
+#include "../../include/dto/Person.h"
 
 using namespace std;
 
@@ -10,68 +13,72 @@ void ClassDAO::add(const ClassDTO& classDTO) {
     College::getClasses().push_back(ptrClassDTO);
 }
 
-void ClassDAO::addProfessorToClass(const string semesterId, const string subjectCode, const string teacherId) {
+void ClassDAO::read() {
+    vector<shared_ptr<ClassDTO>>& classesVector = College::getClasses();    
     
-    try {
-        auto classDTO = verifyClassExistence(semesterId, subjectCode);
-        
-        if (classDTO == nullptr) {
-            throw runtime_error("Não há nenhuma classe com esses dados.");
-        }
-
-        //O second é usado para pegar apenas o objeto no par findTeacher, o qual é armazenado na variável teacherObject
-        auto findTeacher = College::getTeachers().find(teacherId);
-        shared_ptr<Person> teacherObject = findTeacher->second;
-
-        if(findTeacher == College::getTeachers().end()) {
-            throw runtime_error("Não foi encontrado um professor com o ID correspondente.");
-        }
-
-        //Adiciona um professor a classe
-        classDTO->setTeacherId(teacherId);
-        
-        //Passa o teacherObject do tipo Person para o tipo TeacherDTO, de forma a poder usar o método addSubject
-        //O método addSubject adiciona a matéria e o semestre ao map de matérias lecionadas pelo professor na classe TeacherDTO
-        shared_ptr<TeacherDTO> teacherPtr = dynamic_pointer_cast<TeacherDTO>(teacherObject);
-        teacherPtr->addSubject(semesterId, subjectCode);
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
-}
-
-
-void ClassDAO::addStudentToClass(const string semesterId, const string subjectCode, const string studentRA) {
-    
-    try {
-        auto classDTO = verifyClassExistence(semesterId, subjectCode);
-
-        if (classDTO == nullptr) {
-            throw runtime_error("Não há nenhuma classe com esses dados.");
-        }
-
-        auto findStudent = College::getStudents().find(studentRA); 
-
-        if(findStudent == College::getStudents().end()) {
-            throw runtime_error("Não foi encontrado um aluno com o RA correspondente.");
-        }
-
-        classDTO->getStudentsRAs().push_back(studentRA);
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
+    for (auto& it : classesVector) {
+        cout << "Código da matéria: " << it->getSemesterSubjectCode().getSubjectCode() << " | Semestre: " << it->getSemesterSubjectCode().getSemesterId() << endl;
     }
 }
 
 //Verifica se existe uma classe de acordo com as chaves (Id do semestre e código da matéria)
-shared_ptr<ClassDTO> ClassDAO::verifyClassExistence(const string semesterId, const string subjectCode) {
-    vector<shared_ptr<ClassDTO>> classesVector = College::getClasses();
+shared_ptr<ClassDTO> ClassDAO::search(SemesterSubject code) {
+    try {
+        string semesterId = code.getSemesterId();
+        string subjectCode = code.getSubjectCode();
 
-    for(auto& it : classesVector) { 
-        if (it->getCode() == subjectCode && it->getId() == semesterId) { 
-            return it;
+        vector<shared_ptr<ClassDTO>>& classesVector = College::getClasses();
+
+        for(auto& it : classesVector) { 
+            if (it->getSemesterSubjectCode().getSubjectCode() == subjectCode && it->getSemesterSubjectCode().getSemesterId() == semesterId) { 
+                return it;
+            }
         }
-    }
 
-    return nullptr; 
+        throw runtime_error("Não há nenhuma classe com esses dados.");
+
+    } catch(const exception &e) {
+        throw;
+    }
+}
+
+void ClassDAO::addProfessorToClass(SemesterSubject code, const string teacherId) {
+    
+    try {
+        auto classDTO = search(code);
+         
+        TeacherDAO teacherdao;
+        shared_ptr<TeacherDTO> teacherPtr = teacherdao.search(teacherId);
+
+        //Adiciona um professor a classe
+        classDTO->setTeacherId(teacherId);
+      
+        //O método addSubject adiciona a matéria e o semestre ao map de matérias lecionadas pelo professor na classe TeacherDTO
+        teacherPtr->addSubject(code.getSemesterId(), code.getSubjectCode());
+
+    } catch (const exception& e) {
+        cout << "Erro: " << e.what() << endl;
+    }
+}
+
+void ClassDAO::addStudentAndGradeToClass(SemesterSubject code, const string studentRA, const double studentGrade) {
+    
+    try {
+        auto classDTO = search(code);
+
+        StudentDAO studentdao;
+        shared_ptr<StudentDTO> studentPtr = studentdao.search(studentRA);
+
+        classDTO->getStudentsRAs().push_back(studentRA);
+        
+        //Adiciona a nota e RA do aluno ao map de ra e nota
+        pair<string, double> RaAndGrade(studentRA, studentGrade);
+        classDTO->getStudentGrades().insert(RaAndGrade);
+
+        //Adiciona a matéria ao vetor de disciplinas matriculadas
+        studentPtr->addSubject(code.getSemesterId(), code.getSubjectCode());
+
+    } catch (const exception& e) {
+        cout << "Erro: " << e.what() << endl;
+    }
 }

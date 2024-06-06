@@ -24,23 +24,4 @@ void TeacherDTO::setSalary(const double& salary) {
     this->salary = salary;
 }
 
-map<string, set<string>>& TeacherDTO::getSubjectsTaught() {
-    return this->subjectsTaught;
-}
-
-set<string> TeacherDTO::findSubjectsTaught(const string semesterId) const {
-    auto it = subjectsTaught.find(semesterId);
-
-    if (it != subjectsTaught.end()) {
-        return it->second;
-    } else {
-        cout << "Nenhuma matéria foi lecionada no semestre especificado." << endl;
-        return {};
-    }
-}
-
-void TeacherDTO::addSubject(const string semesterId, const string subjectCode) {
-    this->subjectsTaught[semesterId].insert(subjectCode);
-}
-
 TeacherDTO::~TeacherDTO() {}

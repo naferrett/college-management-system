@@ -2,9 +2,9 @@
 #include <string>
 #include <vector>
 #include <map>
-
 #include "Semester.h"
 #include "Subject.h"
+#include "SemesterSubject.h"
 
 using namespace std;
 
@@ -14,6 +14,7 @@ using namespace std;
 class ClassDTO: public Semester, public Subject {
 
     protected:
+        SemesterSubject code;
         string teacherId;
         vector<string> studentsRAs;
         map<string, double> studentGrades;
@@ -29,6 +30,9 @@ class ClassDTO: public Semester, public Subject {
 
         map<string, double> getStudentGrades();
         void setStudentGrades(map<string, double>& studentGrades);
+
+        SemesterSubject getSemesterSubjectCode();
+        void setSemesterSubjectCode(SemesterSubject code);
 
         ~ClassDTO();
 

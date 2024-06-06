@@ -10,10 +10,13 @@
 
 using namespace std;
 
-class StudentDAO : public AbstractDAO<StudentDTO> {
+class StudentDAO : public AbstractDAO<StudentDTO, string> {
 
     public:    
         void add(const StudentDTO& studentDTO) override;
+        void read() override;
+        shared_ptr<StudentDTO> search(string studentRA) override;
+        void remove(string studentRA) override;
 };
 
 #endif
