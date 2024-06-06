@@ -6,7 +6,7 @@ Semester::Semester(string id, int year, int semesterNumber) {
     this->semesterNumber = semesterNumber;
 }
 
-string Semester::getId() {
+string Semester::getId() const{
     return id;
 }
 

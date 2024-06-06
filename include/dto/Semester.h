@@ -18,7 +18,7 @@ class Semester {
     public:
         Semester(string id, int year, int semesterNumber);
 
-        string getId();
+        string getId() const;
         void setId(string id);
         bool isValidSemesterId(string id);
 

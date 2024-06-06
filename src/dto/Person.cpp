@@ -50,4 +50,13 @@ void Person::addSubject(const string semesterId, const string subjectCode) {
     this->subjects[semesterId].insert(subjectCode);
 }
 
+
+void Person::removeSubject(const string semesterId, const string subjectCode) {
+    auto& subjectVec = subjects[semesterId];
+    auto it = find(subjectVec.begin(), subjectVec.end(), subjectCode);
+    if (it != subjectVec.end()) {
+        subjectVec.erase(it);
+    }
+}
+
 Person::~Person() {}

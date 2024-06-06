@@ -6,7 +6,7 @@ Subject::Subject(string code, string name, string syllabus) {
     this->syllabus = syllabus;
 }
 
-string Subject::getCode() {
+string Subject::getCode() const{
     return code;
 }
 

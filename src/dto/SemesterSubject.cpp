@@ -5,7 +5,7 @@ SemesterSubject::SemesterSubject(string semesterId, string subjectCode) {
     this->subjectCode = subjectCode;
 }
 
-string SemesterSubject::getSemesterId(){
+string SemesterSubject::getSemesterId() const{
     return semesterId;
 }
 
@@ -13,7 +13,7 @@ void SemesterSubject::setSemesterId(string semesterId) {
     this->semesterId = semesterId;
 }
 
-string SemesterSubject::getSubjectCode() {
+string SemesterSubject::getSubjectCode() const{
     return subjectCode;
 }
 

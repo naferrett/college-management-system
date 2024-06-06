@@ -5,6 +5,12 @@ using namespace std;
 
 void TeacherDAO::add(const TeacherDTO& teacherDTO) {
 
+    auto findTeacher = College::getTeachers().find(teacherDTO.getId());
+
+    if(findTeacher != College::getTeachers().end()) {
+        throw runtime_error("Já existe um professor com o identificador correspondente.");
+    }
+
     pair<string, shared_ptr<Person>> teacherMap(teacherDTO.getId(), make_shared<TeacherDTO>(teacherDTO));
     College::getTeachers().insert(teacherMap);
 }
@@ -43,6 +49,114 @@ void TeacherDAO::remove(string teacherId) {
         shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
         College::getTeachers().erase(teacherId);
         cout << "O professor foi removido com sucesso." << endl;
+
+    } catch (const exception& e) {
+        cout << "Erro: " << e.what() << endl;
+    }
+}
+
+void TeacherDAO::update(int option, string teacherId) {
+    switch(option) {
+        case 1:
+            {
+                string newName;
+                cout << "Digite o novo nome: ";
+                cin >> newName;
+                updateName(teacherId, newName);
+            }
+            break;
+        case 2:
+            {
+                int newAge;
+                cout << "Digite a nova idade: ";
+                cin >> newAge;
+                updateAge(teacherId, newAge);
+            }
+            break;
+        case 3:
+            {
+                string newPhone;
+                cout << "Digite o novo telefone: ";
+                cin >> newPhone;
+                updatePhone(teacherId, newPhone);
+            }
+            break;
+        case 4:
+            {
+                string newId;
+                cout << "Digite o novo identificador: ";
+                cin >> newId;
+                updateId(teacherId, newId);
+            }
+            break;
+        case 5:
+            {
+                double newSalary;
+                cout << "Digite o novo salário: ";
+                cin >> newSalary;
+                updateSalary(teacherId, newSalary);
+            }
+            break;
+        
+        default:
+            cout << "Opção inválida." << endl;
+    }
+}
+
+void TeacherDAO::updateName(string teacherId, string newName) {
+
+    try {
+        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+        teacherPtr->setName(newName);
+
+    } catch (const exception& e) {
+        cout << "Erro: " << e.what() << endl;
+    }
+}
+
+void TeacherDAO::updateAge(const string teacherId, int newAge) {
+
+    try {
+        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+        teacherPtr->setAge(newAge);
+
+    } catch (const exception& e) {
+        cout << "Erro: " << e.what() << endl;
+    }
+}
+
+void TeacherDAO::updatePhone(const string teacherId, string newPhone) {
+
+    try {
+        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+        teacherPtr->setPhone(newPhone);
+
+    } catch (const exception& e) {
+        cout << "Erro: " << e.what() << endl;
+    }
+}
+
+void TeacherDAO::updateId(const string teacherId, string newId) {
+
+    try {
+        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+
+        auto teacherExists = College::getTeachers().find(newId);
+        if (teacherExists->first == newId) {
+            throw runtime_error("O identificador inserido já está em uso. Tente novamente.");
+        }
+
+        teacherPtr->setId(newId);
+    } catch (const exception& e) {
+        cout << "Erro: " << e.what() << endl;
+    }
+}
+
+void TeacherDAO::updateSalary(const string teacherId, double newSalary) {
+
+    try {
+        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+        teacherPtr->setSalary(newSalary);
 
     } catch (const exception& e) {
         cout << "Erro: " << e.what() << endl;

@@ -20,7 +20,7 @@ class ClassDTO: public Semester, public Subject {
         map<string, double> studentGrades;
 
     public:
-        ClassDTO(string semesterId, int semesterYear, int semesterNumber, string subjCode, string subjName, string subjSyllabus, string teacherId, vector<string>& studentsRAs, map<string, double>& studentGrades);
+        ClassDTO(string semesterId, int semesterYear, int semesterNumber, string subjCode, string subjName, string subjSyllabus);
 
         string getTeacherId();
         void setTeacherId(string teacherId);

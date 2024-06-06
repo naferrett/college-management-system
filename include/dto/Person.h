@@ -5,6 +5,7 @@
 #include <set>
 #include <map>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -29,6 +30,7 @@ class Person {
 		void setAge(int age);
 		void setPhone(const string& phone);
         void addSubject(const string semesterId, const string subjectCode);
+		void removeSubject(const string semesterId, const string subjectCode);
         set<string> findSubjects(const string semesterId);
 
 		virtual	~Person();

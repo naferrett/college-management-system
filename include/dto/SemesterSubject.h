@@ -16,10 +16,10 @@ class SemesterSubject {
     public:
         SemesterSubject(string semesterId, string subjectCode);
 
-        string getSemesterId();
+        string getSemesterId() const;
         void setSemesterId(string semesterId);
 
-        string getSubjectCode();
+        string getSubjectCode() const;
         void setSubjectCode(string subjectCode);
 };
 

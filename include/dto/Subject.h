@@ -16,7 +16,7 @@ class Subject {
     public:
         Subject(string code, string name, string syllabus);
 
-        string getCode();
+        string getCode() const;
         void setCode(string code);
 
         string getName();
