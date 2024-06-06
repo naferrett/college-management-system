@@ -19,8 +19,6 @@ class College final {
 		static map<string, shared_ptr<Person>> students;
 		static map<string, shared_ptr<Person>> teachers;
 		static vector<shared_ptr<ClassDTO>> classes;
-		static vector<shared_ptr<Subject>> subjects;
-		static vector<shared_ptr<Semester>> semesters;
 
 	public:
 		static map<string, shared_ptr<Person>>& getStudents();
@@ -29,10 +27,6 @@ class College final {
 		void setTeachers(map<string, shared_ptr<Person>> teachers);
 		static vector<shared_ptr<ClassDTO>>& getClasses();
 		void setClasses(vector<shared_ptr<ClassDTO> > &classes);
-		static vector<shared_ptr<Subject>>& getSubjects();
-		void setSubjects(vector<shared_ptr<Subject> > &subjects);
-	    static vector<shared_ptr<Semester>>& getSemesters();
-		void setSemesters(vector<shared_ptr<Semester>>& semesters);
 
 };
 

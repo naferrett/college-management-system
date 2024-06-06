@@ -19,7 +19,6 @@
 #include "../../include/dao/TeacherDAO.h"
 #include "../../include/dto/Subject.h"
 #include "../../include/dto/StudentDTO.h"
-#include "../../include/dao/SubjectDAO.h"
 #include "../../include/dto/TeacherDTO.h"
 #include "../../include/dao/ClassDAO.h"
 #include "../../include/dto/Semester.h"
@@ -247,8 +246,9 @@ void Controller::actionInsertTeacher() {
 }
 
 //add
-void Controller::actionInsertSubject() {
+void Controller::actionInsertClass() {
     
+		//colocar todos os atributos pra inicializar a turma	
         string code, name, syllabus;
         
         cout << "Inserir nova disciplina:" << endl;

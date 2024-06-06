@@ -32,7 +32,7 @@ private:
 	//add
 	void actionInsertStudent();
 	void actionInsertTeacher();
-	void actionInsertSubject();
+	void actionInsertClass();
 
 	void actionInsertStudentToClass();
 	void actionInsertTeacherToClass();

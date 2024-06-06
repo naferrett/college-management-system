@@ -34,6 +34,8 @@ void ClassDAO::read() {
 
 //Verifica se existe uma classe de acordo com as chaves (Id do semestre e código da matéria)
 shared_ptr<ClassDTO> ClassDAO::search(SemesterSubject code) {
+
+
     try {
         string semesterId = code.getSemesterId();
         string subjectCode = code.getSubjectCode();
@@ -57,13 +59,13 @@ void ClassDAO::remove(SemesterSubject code) {
     
     try {
         shared_ptr<ClassDTO> classPtr = search(code);
-        auto it = find(College::getClasses().begin(), College::getClasses().end(), classPtr);
+        auto findClass = find(College::getClasses().begin(), College::getClasses().end(), classPtr);
 
-        if (it == College::getClasses().end()) {
+        if (findClass == College::getClasses().end()) {
             throw runtime_error("A classe não foi removida, pois não foi encontrada."); 
         }
 
-        College::getClasses().erase(it);
+        College::getClasses().erase(findClass);
         cout << "A classe foi removida com sucesso." << endl;
 
     } catch (const exception& e) {
