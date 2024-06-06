@@ -24,5 +24,9 @@ void StudentDTO::setCourse(const string& course) {
     this->course = course;
 }
 
+vector<double> StudentDTO::getGrades() const {
+    return grades;
+}
+
 StudentDTO::~StudentDTO() {}
 

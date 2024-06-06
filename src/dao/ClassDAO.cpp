@@ -283,6 +283,9 @@ void ClassDAO::addStudentAndGradeToClass(SemesterSubject code, const string stud
 
         //Adiciona a matéria ao vetor de disciplinas matriculadas
         studentPtr->addSubject(code.getSemesterId(), code.getSubjectCode());
+        
+        //Adiciona a nota ao vetor de notas do estudante
+        studentPtr->getGrades().push_back(studentGrade);
 
     } catch (const exception& e) {
         cout << "Erro: " << e.what() << endl;

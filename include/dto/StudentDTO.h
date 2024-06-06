@@ -11,12 +11,14 @@ class StudentDTO : public Person {
 private:
     string ra;
     string course;
+    vector<double> grades;
 
 public:
     StudentDTO(string name, int age, string phone, string ra, string course);
 
     string getRa() const;
     string getCourse() const;
+    vector<double> getGrades() const;
 
     void setRa(const string& ra);
     void setCourse(const string& course);
