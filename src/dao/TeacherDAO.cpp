@@ -25,34 +25,26 @@ void TeacherDAO::read() {
 
 shared_ptr<TeacherDTO> TeacherDAO::search(string teacherId) {
 
-    try {
-        auto findTeacher = College::getTeachers().find(teacherId);
+    auto findTeacher = College::getTeachers().find(teacherId);
 
-        if(findTeacher == College::getTeachers().end()) {
-            throw runtime_error("Não foi encontrado um professor com o ID correspondente.");
-        }
-
-        //no controller, quando retornar o professor, precisa armazenar em um objeto e ir dando teacherobject.getname(), getRa()... pra mostrar essas informações do professor
-        //fazer isso aqui não faz sentido, tem que ser no controller
-        shared_ptr<Person> teacherObject = findTeacher->second;
-        shared_ptr<TeacherDTO> teacherPtr = dynamic_pointer_cast<TeacherDTO>(teacherObject);
-        
-        return teacherPtr;
-    } catch (const exception& e) {
-        throw;
+    if(findTeacher == College::getTeachers().end()) {
+        throw runtime_error("Não foi encontrado um professor com o ID correspondente.");
     }
+
+    //no controller, quando retornar o professor, precisa armazenar em um objeto e ir dando teacherobject.getname(), getRa()... pra mostrar essas informações do professor
+    //fazer isso aqui não faz sentido, tem que ser no controller
+    shared_ptr<Person> teacherObject = findTeacher->second;
+    shared_ptr<TeacherDTO> teacherPtr = dynamic_pointer_cast<TeacherDTO>(teacherObject);
+    
+    return teacherPtr;
+
 }
 
 void TeacherDAO::remove(string teacherId) {
-    
-    try {
-        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
-        College::getTeachers().erase(teacherId);
-        cout << "O professor foi removido com sucesso." << endl;
 
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
+    shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+    College::getTeachers().erase(teacherId);
+    cout << "O professor foi removido com sucesso." << endl;
 }
 
 void TeacherDAO::update(int option, string teacherId) {
@@ -104,61 +96,33 @@ void TeacherDAO::update(int option, string teacherId) {
 }
 
 void TeacherDAO::updateName(string teacherId, string newName) {
-
-    try {
-        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
-        teacherPtr->setName(newName);
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
+    shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+    teacherPtr->setName(newName);
 }
 
 void TeacherDAO::updateAge(const string teacherId, int newAge) {
-
-    try {
-        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
-        teacherPtr->setAge(newAge);
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
+    shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+    teacherPtr->setAge(newAge);
 }
 
 void TeacherDAO::updatePhone(const string teacherId, string newPhone) {
-
-    try {
-        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
-        teacherPtr->setPhone(newPhone);
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
+    shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+    teacherPtr->setPhone(newPhone);
 }
 
 void TeacherDAO::updateId(const string teacherId, string newId) {
 
-    try {
-        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+    shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
 
-        auto teacherExists = College::getTeachers().find(newId);
-        if (teacherExists->first == newId) {
-            throw runtime_error("O identificador inserido já está em uso. Tente novamente.");
-        }
-
-        teacherPtr->setId(newId);
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
+    auto teacherExists = College::getTeachers().find(newId);
+    if (teacherExists->first == newId) {
+        throw runtime_error("O identificador inserido já está em uso. Tente novamente.");
     }
+
+    teacherPtr->setId(newId);
 }
 
 void TeacherDAO::updateSalary(const string teacherId, double newSalary) {
-
-    try {
-        shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
-        teacherPtr->setSalary(newSalary);
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
+    shared_ptr<TeacherDTO> teacherPtr = search(teacherId);
+    teacherPtr->setSalary(newSalary);
 }

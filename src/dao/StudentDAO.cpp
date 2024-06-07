@@ -39,15 +39,9 @@ shared_ptr<StudentDTO> StudentDAO::search(string studentRA) {
 }
 
 void StudentDAO::remove(string studentRA) {
-    
-    try {
-        shared_ptr<StudentDTO> studentPtr = search(studentRA);
-        College::getStudents().erase(studentRA);
-        cout << "O estudante foi removido com sucesso." << endl;
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
+    shared_ptr<StudentDTO> studentPtr = search(studentRA);
+    College::getStudents().erase(studentRA);
+    cout << "O estudante foi removido com sucesso." << endl;
 }
 
 void StudentDAO::update(int option, string studentRA) {
@@ -99,61 +93,32 @@ void StudentDAO::update(int option, string studentRA) {
 }
 
 void StudentDAO::updateName(const string studentRA, string newName) {
-
-    try {
-        shared_ptr<StudentDTO> studentPtr = search(studentRA);
-        studentPtr->setName(newName);
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
+    shared_ptr<StudentDTO> studentPtr = search(studentRA);
+    studentPtr->setName(newName);
 }
 
 void StudentDAO::updateAge(const string studentRA, int newAge) {
-
-    try {
-        shared_ptr<StudentDTO> studentPtr = search(studentRA);
-        studentPtr->setAge(newAge);
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
+    shared_ptr<StudentDTO> studentPtr = search(studentRA);
+    studentPtr->setAge(newAge);
 }
 
 void StudentDAO::updatePhone(const string studentRA, string newPhone) {
-
-    try {
-        shared_ptr<StudentDTO> studentPtr = search(studentRA);
-        studentPtr->setPhone(newPhone);
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
+    shared_ptr<StudentDTO> studentPtr = search(studentRA);
+    studentPtr->setPhone(newPhone);
 }
 
 void StudentDAO::updateRA(const string studentRA, string newRA) {
+    shared_ptr<StudentDTO> studentPtr = search(studentRA);
 
-    try {
-        shared_ptr<StudentDTO> studentPtr = search(studentRA);
-
-        auto studentExists = College::getStudents().find(newRA);
-        if (studentExists->first == newRA) {
-            throw runtime_error("O identificador inserido já está em uso. Tente novamente.");
-        }
-
-        studentPtr->setRa(newRA);
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
+    auto studentExists = College::getStudents().find(newRA);
+    if (studentExists->first == newRA) {
+        throw runtime_error("O identificador inserido já está em uso. Tente novamente.");
     }
+
+    studentPtr->setRa(newRA);
 }
 
 void StudentDAO::updateCourse(const string studentRA, string newCourse) {
-
-    try {
-        shared_ptr<StudentDTO> studentPtr = search(studentRA);
-        studentPtr->setCourse(newCourse);
-
-    } catch (const exception& e) {
-        cout << "Erro: " << e.what() << endl;
-    }
+    shared_ptr<StudentDTO> studentPtr = search(studentRA);
+    studentPtr->setCourse(newCourse);
 }
