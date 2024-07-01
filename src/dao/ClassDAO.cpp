@@ -35,23 +35,21 @@ void ClassDAO::read() {
 //Verifica se existe uma classe de acordo com as chaves (Id do semestre e código da matéria)
 shared_ptr<ClassDTO> ClassDAO::search(SemesterSubject code) {
 
-    string semesterId = code.getSemesterId();
-    string subjectCode = code.getSubjectCode();
+        string semesterId = code.getSemesterId();
+        string subjectCode = code.getSubjectCode();
 
-    vector<shared_ptr<ClassDTO>>& classesVector = College::getClasses();
+        vector<shared_ptr<ClassDTO>>& classesVector = College::getClasses();
 
-    for(auto& it : classesVector) { 
-        if (it->getSemesterSubjectCode().getSubjectCode() == subjectCode && it->getSemesterSubjectCode().getSemesterId() == semesterId) { 
-            return it;
+        for(auto& it : classesVector) { 
+            if (it->getSemesterSubjectCode().getSubjectCode() == subjectCode && it->getSemesterSubjectCode().getSemesterId() == semesterId) { 
+                return it;
+            }
         }
-    }
 
-    throw runtime_error("Não há nenhuma classe com esses dados.");
-
+        throw runtime_error("Não há nenhuma classe com esses dados.");
 }
 
 void ClassDAO::remove(SemesterSubject code) {
-    
     shared_ptr<ClassDTO> classPtr = search(code);
     auto findClass = find(College::getClasses().begin(), College::getClasses().end(), classPtr);
 
@@ -61,7 +59,6 @@ void ClassDAO::remove(SemesterSubject code) {
 
     College::getClasses().erase(findClass);
     cout << "A classe foi removida com sucesso." << endl;
-
 }
 
 void ClassDAO::update(int option, SemesterSubject code) {
@@ -129,8 +126,6 @@ void ClassDAO::update(int option, SemesterSubject code) {
 }
 
 void ClassDAO::updateSemesterId(SemesterSubject code, string newSemesterId) {
-
-
     shared_ptr<ClassDTO> classPtr = search(code);
 
     SemesterSubject codeExists(newSemesterId, code.getSubjectCode());
@@ -138,65 +133,47 @@ void ClassDAO::updateSemesterId(SemesterSubject code, string newSemesterId) {
         throw runtime_error("O identificador inserido já está em uso com essa mesma matéria. Tente novamente.");
     }
     classPtr->setId(newSemesterId);
-    //classPtr->getSemesterSubjectCode().setSemesterId(newSemesterId);
-
 }
 
 void ClassDAO::updateSemesterYear(SemesterSubject code, int newSemesterYear) {
-
     shared_ptr<ClassDTO> classPtr = search(code);
     classPtr->setYear(newSemesterYear);
-    //classPtr->getSemesterSubjectCode().setSemesterId(newSemesterId);
-
-
 }
 
 void ClassDAO::updateSemesterNumber(SemesterSubject code, int newSemesterNumber) {
-
     shared_ptr<ClassDTO> classPtr = search(code);
     classPtr->setYear(newSemesterNumber);
-    //classPtr->getSemesterSubjectCode().setSemesterId(newSemesterId);
-
-
 }
 
 void ClassDAO::updateSubjCode(SemesterSubject code, string newSubjCode) {
-
     shared_ptr<ClassDTO> classPtr = search(code);
 
     SemesterSubject codeExists(code.getSemesterId(), newSubjCode);
     if(search(codeExists)) {
         throw runtime_error("O identificador inserido já está em uso com essa mesma matéria. Tente novamente.");
     }
+    classPtr->setCode(newSubjCode);
 }
 
 void ClassDAO::updateSubjName(SemesterSubject code, string newSubjName) {
-
     shared_ptr<ClassDTO> classPtr = search(code);
     classPtr->setName(newSubjName);
-    //classPtr->getSemesterSubjectCode().setSemesterId(newSemesterId);
 }
 
 void ClassDAO::updateSubjSyllabus(SemesterSubject code, string newSyllabus) {
-
     shared_ptr<ClassDTO> classPtr = search(code);
     classPtr->setSyllabus(newSyllabus);
-    //classPtr->getSemesterSubjectCode().setSemesterId(newSemesterId);
-
 }
 
 void ClassDAO::updateTeacherId(SemesterSubject code, string newTeacherId) {
-
     shared_ptr<ClassDTO> classPtr = search(code);
     string oldTeacherId = classPtr->getTeacherId();
     
     removeProfessorFromClass(code, oldTeacherId);
     addProfessorToClass(code, newTeacherId);
-
 }
 
 void ClassDAO::addProfessorToClass(SemesterSubject code, const string teacherId) {
-
     auto classDTO = search(code);
         
     TeacherDAO teacherdao;
@@ -210,7 +187,6 @@ void ClassDAO::addProfessorToClass(SemesterSubject code, const string teacherId)
 }
 
 void ClassDAO::removeProfessorFromClass(SemesterSubject code, const string teacherId) {
-
     auto classDTO = search(code);
         
     TeacherDAO teacherdao;
@@ -220,7 +196,6 @@ void ClassDAO::removeProfessorFromClass(SemesterSubject code, const string teach
 }
 
 void ClassDAO::addStudentAndGradeToClass(SemesterSubject code, const string studentRA, const double studentGrade) {
- 
     auto classDTO = search(code);
 
     StudentDAO studentdao;

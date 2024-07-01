@@ -14,7 +14,7 @@ using namespace std;
 class ClassDTO: public Semester, public Subject {
 
     protected:
-        SemesterSubject code;
+        SemesterSubject code; 
         string teacherId;
         vector<string> studentsRAs;
         map<string, double> studentGrades;
@@ -25,10 +25,10 @@ class ClassDTO: public Semester, public Subject {
         string getTeacherId();
         void setTeacherId(string teacherId);
 
-        vector<string> getStudentsRAs();
+        vector<string>& getStudentsRAs();
         void setStudentsRAs(vector<string>& studentsRAs);
 
-        map<string, double> getStudentGrades();
+        map<string, double>& getStudentGrades();
         void setStudentGrades(map<string, double>& studentGrades);
 
         SemesterSubject getSemesterSubjectCode();

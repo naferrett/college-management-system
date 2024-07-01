@@ -15,7 +15,7 @@ void ClassDTO::setTeacherId(string teacherId) {
     this->teacherId = teacherId;
 }
 
-vector<string> ClassDTO::getStudentsRAs() {
+vector<string>& ClassDTO::getStudentsRAs() {
     return studentsRAs;
 }
 
@@ -23,7 +23,7 @@ void ClassDTO::setStudentsRAs(vector<string>& studentsRAs) {
     this->studentsRAs = studentsRAs;
 }
 
-map<string, double> ClassDTO::getStudentGrades() {
+map<string, double>& ClassDTO::getStudentGrades() {
     return studentGrades;
 }
 

@@ -3,6 +3,7 @@
 
 #include "Person.h"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ public:
 
     string getRa() const;
     string getCourse() const;
-    vector<double> getGrades() const;
+    vector<double>& getGrades();
 
     void setRa(const string& ra);
     void setCourse(const string& course);
